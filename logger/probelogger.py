@@ -8,15 +8,15 @@ from scapy.all import *
 from pprint import pprint
 from logging.handlers import RotatingFileHandler
 import requests
+from keys.py import codekey
 
 last_update = time.time()
 
 def update(value):
 	code = 2
-	place_key = ['39vkdjr7','d9ekd0sk', 'vdf98afe']
 	baseURL = "https://ksadensity.com/inbound.php?id="
 	valueParam = "&data="
-	URL = baseURL+str(place_key[code])+valueParam+str(value)
+	URL = baseURL+str(codekey(code))+valueParam+str(value)
 	response = requests.get(URL)
 	return response.status_code
 
