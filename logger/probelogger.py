@@ -8,7 +8,7 @@ from scapy.all import *
 from pprint import pprint
 from logging.handlers import RotatingFileHandler
 import requests
-from keys.py import codekey
+from key import codekey
 
 last_update = time.time()
 
