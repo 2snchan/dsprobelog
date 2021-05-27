@@ -1,0 +1,131 @@
+body {
+    background: #EDEDF3;
+    margin: 0;
+    font-family: 'NanumSquareRound';
+    font-weight: 500;
+    color: white;
+}
+header {
+    background: #222E3C;
+    color: white;
+    height: 11vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+#logo {
+    background: #2d4561;
+    width: 11vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+}
+#title {
+    font-family: 'NanumSquareRound';
+    font-size: 3.5vh;
+    font-weight: 600;
+    padding-left: 3vh;
+    padding-top: 0.2vh;
+}
+#content {
+    width: 90%;
+    max-width: 80vh;
+    margin: 0 auto;
+    padding: 0;
+}
+#clock-container {
+    width: auto;
+    height: 23vh;
+    border-radius: 2.5vh;
+    margin-top: 2vh;
+    box-shadow: 0 0 1vh rgb(216, 216, 216);
+    background: rgb(245, 246, 248);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    padding-inline-start: 8%;
+    padding-inline-end: 8%;
+}
+#clock {
+    grid-row: 1 / 3;
+    vertical-align: middle;
+    padding-inline-end: 0;
+    margin: 0;
+    color: black;
+    font-size: 8vh;
+    padding-top: 1vh;
+    font-weight: 300;
+}
+.clock-tag {
+    color: black;
+    font-size: 2.5vh;
+    justify-self: end;
+    padding-left: 0;
+    margin: 0;
+    padding-block: 1.2vh;
+}
+#period {
+    align-self: end;
+}
+#interval-name {
+    align-self: start;
+}
+.bar-container {
+    width: 100%;
+    height: 9vh;
+    border-radius: 2.5vh;
+    margin-top: 2vh;
+    box-shadow: 0 0 1vh rgb(216, 216, 216);
+    background: #c6c6d6;
+    overflow: hidden;
+}
+.bar {
+    width: 0%;
+    height: 100%;
+    vertical-align: middle;
+    border-radius: 0;
+    -moz-border-radius: 2.5vh 0 0 2.5vh;
+    overflow: visible;
+    transition: 1s ease;
+}
+.tag {
+    position: absolute;
+    z-index: 100;
+    height: 9vh;
+    width: 90%;
+    max-width: 80vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.tag-text {
+    flex-basis: auto;
+    padding-inline-start: 3vh;
+    font-size: 3vh;
+}
+.cap-text {
+    flex-basis: auto;
+    font-size: 2.3vh;
+    padding-inline-end: 2.3vh;
+}
+#lib .bar {
+    background: #67D5B5;
+}
+#caf .bar {
+    background: #EE7785;
+}
+#ch3 .bar {
+    background: #84B1ED;
+}
+#info {
+    color: #91989e;
+    float: right;
+    padding-top: 2vh;
+    font-size: 1.6vh;
+}
