@@ -1,4 +1,5 @@
 sudo rmmod r8188eu.ko
+sudo rmmod 8188eu.ko
 sudo insmod 8188eu.ko
 
 sudo ifconfig wlx7cc2c6026fb5 down
