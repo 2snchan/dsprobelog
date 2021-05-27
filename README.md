@@ -10,18 +10,22 @@ start.sh -> Start code for ubuntu 18.04
 
 ## Instructions
 First, we use modprobe functions to force reinstall drivers.  
-sudo lsmod | grep 8188  
+~~~sudo lsmod | grep 8188  
 sudo rmmod r8188eu.ko  
 sudo rmmod 8188eu.ko  
 sudo insmod 8188eu.ko  
-
+~~~
 Next, use iwconfig to determine wlan interface name.  
+~~~
 iwconfig
-
-Then, restart iface and change mod.  
+~~~
+Then, restart iface and change mode into monitor mode.  
+~~~
 sudo ifconfig wlx7cc2c6026fb5 down  
 sudo iwconfig wlx7cc2c6026fb5 mode monitor  
 sudo ifconfig wlx7cc2c6026fb5 up  
-
+~~~
 We can start probelogger.py with start.sh then.  
+~~~
 sudo ./start.sh  
+~~~
