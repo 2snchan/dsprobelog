@@ -7,11 +7,12 @@ import logging
 from scapy.all import *
 from pprint import pprint
 from logging.handlers import RotatingFileHandler
+import requests
 
 last_update = time.time()
 
 def update(value):
-	code = 0
+	code = 2
 	place_key = ['39vkdjr7','d9ekd0sk', 'vdf98afe']
 	baseURL = "https://ksadensity.com/inbound.php?id="
 	valueParam = "&data="
@@ -85,9 +86,10 @@ def build_packet_callback(device,option):
 
 		print("number of devices at "+str(time.time())+" is "+str(number))
 		
-		if last_update - time.time() > 5 :
-			update(number)
+		if time.time() - last_update >= 30 :
+			print(update(number))
 			last_update = time.time()
+			print("logged")
 
 		if option:
 			device.printlist()
@@ -102,7 +104,7 @@ def main():
 	#subprocess.call('sudo iwconfig wlx7cc2c6026fb5 mode monitor',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
-	option, interval = False, 10
+	option, interval = False, 60
 	data = device(int(interval))
 	built_packet_cb = build_packet_callback(data,option)
 	
