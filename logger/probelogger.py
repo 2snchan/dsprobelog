@@ -8,15 +8,17 @@ from scapy.all import *
 from pprint import pprint
 from logging.handlers import RotatingFileHandler
 import requests
+from key import codekey
 
 last_update = time.time()
 
 def update(value):
 	code = 2
-	place_key = ['39vkdjr7','d9ekd0sk', 'vdf98afe']
 	baseURL = "https://ksadensity.com/inbound.php?id="
 	valueParam = "&data="
-	URL = baseURL+str(place_key[code])+valueParam+str(value)
+	key,capacity = codekey(code)
+	value = min(capacity,value)
+	URL = baseURL+str(key)+valueParam+str(value)
 	response = requests.get(URL)
 	return response.status_code
 
@@ -104,7 +106,7 @@ def main():
 	#subprocess.call('sudo iwconfig wlx7cc2c6026fb5 mode monitor',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
-	option, interval = False, 60
+	option, interval = True, 110
 	data = device(int(interval))
 	built_packet_cb = build_packet_callback(data,option)
 	
