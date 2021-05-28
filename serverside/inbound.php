@@ -11,9 +11,9 @@
     date_default_timezone_set('Asia/Seoul');
 
     $place_key = array(
-        '39vkdjr7' => 'lib',
-        'd9ekd0sk' => 'caf',
-        'vdf98afe' => 'ch3'
+        'SOME_RANDOM_SECRET_KEY' => 'lib',
+        'SOME_RANDOM_SECRET_KEY' => 'caf',
+        'SOME_RANDOM_SECRET_KEY' => 'ch3'
     );
 
     $place = $place_key[$_GET['id']] ?? null;
@@ -22,7 +22,7 @@
     if($place == null or $data == null) {
         echo '내부 통신 회선입니다. request를 보내지 말아주세요.';
     } else {
-        $conn = mysqli_connect("localhost", "root", "password", "realtime_data");
+        $conn = mysqli_connect("localhost", "root", "PRIVATE_PASSWORD", "realtime_data");
         $timestamp = date('Y-m-d H:i:s');
 
         $realtime_sql = "UPDATE people_density SET people={$data}, last_updated='{$timestamp}' WHERE place='{$place}'";
@@ -47,4 +47,3 @@
 ?>
 </body>
 </html>
-
