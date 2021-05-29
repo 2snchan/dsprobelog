@@ -109,7 +109,7 @@ def main():
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
 	option, interval, rssi = True, 110, -40
-	data = device(int(interval),int(rssi))
+	data = device(int(interval),rssi)
 	built_packet_cb = build_packet_callback(data,option)
 	
 	print("Logging start")
