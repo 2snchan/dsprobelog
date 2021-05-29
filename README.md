@@ -28,4 +28,21 @@ sudo ifconfig wlx7cc2c6026fb5 up
 We can start probelogger.py with start.sh then.  
 ~~~
 sudo ./start.sh  
+~~~  
+  
+## TpLink Archer T4U Driver Install (Ubuntu 18.04)  
+First, install dkms using apt.  
+~~~
+sudo apt-get update  
+sudo apt-get install -y dkms git
+~~~  
+Next, clone repository and run install script.  
+~~~
+git clone https://github.com/morrownr/88x2bu.git  
+cd 88x2bu  
+sudo ./install-driver.sh
+~~~  
+Lastly, reboot device.  
+~~~
+sudo reboot
 ~~~
