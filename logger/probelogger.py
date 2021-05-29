@@ -108,7 +108,7 @@ def main():
 	#subprocess.call('sudo iwconfig wlx7cc2c6026fb5 mode monitor',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
-	option, interval, rssi = True, 110, -40
+	option, interval, rssi = True, 110, -70
 	data = device(int(interval),rssi)
 	built_packet_cb = build_packet_callback(data,option)
 	
