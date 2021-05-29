@@ -23,18 +23,20 @@ def update(value):
 	return response.status_code
 
 class device():
-	def __init__(self,interval):
+	def __init__(self,interval, rssi_threshold):
 		self.data = dict()
 		self.number = 0
 		self.interval = interval
+		self.rssi_threshold = rssi_threshold
+
 	def __str__(self):
 		return self.number
 
 	def insert(self,time,macaddr,target,name,rssi_value):
 		#if target == 'KSA'.encode() or target == 'KSA_SUB'.encode:	
 
-		#if abs(rssi_value) < 200 :
-		#	return
+		if rssi_value < self.rssi_threshold :
+			return
 		
 		if macaddr in self.data:
 			self.data[macaddr][0] = time
@@ -106,8 +108,8 @@ def main():
 	#subprocess.call('sudo iwconfig wlx7cc2c6026fb5 mode monitor',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
-	option, interval = True, 110
-	data = device(int(interval))
+	option, interval, rssi = True, 110, -40
+	data = device(int(interval),int(rssi))
 	built_packet_cb = build_packet_callback(data,option)
 	
 	print("Logging start")
