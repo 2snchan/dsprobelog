@@ -10,7 +10,7 @@ from logging.handlers import RotatingFileHandler
 import requests
 from key import codekey
 
-last_update = time.time()
+last_update = time.time()-60
 
 def update(value):
 	code = 2
@@ -19,8 +19,12 @@ def update(value):
 	key,capacity = codekey(code)
 	value = min(capacity,value)
 	URL = baseURL+str(key)+valueParam+str(value)
-	response = requests.get(URL)
-	return response.status_code
+	try:
+		response = requests.get(URL)
+		return response.status_code
+	except:
+		print("HTTP Request error")
+	return
 
 class device():
 	def __init__(self,interval, rssi_threshold):
