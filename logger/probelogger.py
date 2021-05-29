@@ -99,7 +99,7 @@ def build_packet_callback(device,option):
 	return packet_callback
 
 def main():
-	interface = "wlx7cc2c6026fb5"
+	interface = "wlx005f67f12ddb"
 	
 	#subprocess.call('sudo rmmod r8188eu.ko',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 down',shell=True)
