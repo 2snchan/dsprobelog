@@ -8,14 +8,8 @@ probelogger.py -> logging & updating file
 init.sh -> Driver install code for ubuntu 18.04  
 start.sh -> Start code for ubuntu 18.04
 
-## Instructions
-First, we use modprobe functions to force reinstall drivers.  
-~~~sudo lsmod | grep 8188  
-sudo rmmod r8188eu.ko  
-sudo rmmod 8188eu.ko  
-sudo insmod 8188eu.ko  
-~~~
-Next, use iwconfig to determine wlan interface name.  
+## Instructions  
+First, use iwconfig to determine wlan interface name.  
 ~~~
 iwconfig
 ~~~
@@ -46,3 +40,10 @@ Lastly, reboot device.
 ~~~
 sudo reboot
 ~~~
+
+## Edit configurations  
+In logger/probelogger.py, line 115
+~~~
+	option, interval, rssi = True, 110, -80
+~~~  
+Option is about verbose mode, interval is residence time we assume to device, rssi is rssi threshold value.  
