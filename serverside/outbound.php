@@ -1,7 +1,7 @@
 <?php
     date_default_timezone_set('Asia/Seoul');
 
-    $conn = mysqli_connect("localhost", "root", "password", "realtime_data");
+    $conn = mysqli_connect("localhost", "root", "PRIVATE_PASSWORD", "realtime_data");
 
     $sql = "SELECT * from people_density";
     $result = mysqli_query($conn, $sql);

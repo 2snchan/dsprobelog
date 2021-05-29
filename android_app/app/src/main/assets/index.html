@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="fontawsome.all.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSA Density</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#222E3C">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#222e3c">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#222e3c">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <i class="fas fa-users"></i>
+        </div>
+        <div id="title">KSA Density</div>
+    </header>
+    <section id="content">
+        <div id="clock-container">
+            <div id="clock">00:00</div>
+            <div id="period" class="clock-tag">1교시</div>
+            <div id="interval-name" class="clock-tag">수업시간</div>
+        </div>
+        <div class="bar-container" id="lib">
+            <div class="tag">
+                <div class="tag-text">도서관</div>
+                <div class="cap-text">? / 50</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+        <div class="bar-container" id="caf">
+            <div class="tag">
+                <div class="tag-text">급식실</div>
+                <div class="cap-text">? / 260</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+        <div class="bar-container" id="ch3">
+            <div class="tag">
+                <div class="tag-text">창조관 3F</div>
+                <div class="cap-text">? / 40</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+        <div id="info">made by 19-006 권순호 19-068 이승찬 / 2021 DS project</div>
+    </section>
+    <script src="clock.js"></script>
+    <script src="ajax.js"></script>
+</body>
+</html>
