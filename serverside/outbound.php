@@ -9,7 +9,7 @@
     $data = [];
     while($row = mysqli_fetch_assoc($result)) {
         $last_updated = strtotime($row["last_updated"]);
-        if(strtotime("-1 minutes") < $last_updated) {
+        if(strtotime("-10 minutes") < $last_updated) {
             $data[$row["place"]] = intval($row["people"]);
         } else {
             $data[$row["place"]] = "?";
