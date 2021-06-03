@@ -1,13 +1,7 @@
 import time
 import datetime
-import subprocess
 import netaddr
-import sys
-import logging
 from scapy.all import *
-from pprint import pprint
-from logging.handlers import RotatingFileHandler
-import requests
 from key import codekey
 
 last_update = time.time()-120
@@ -16,7 +10,7 @@ def update(value):
 	code = 2
 	baseURL = "https://ksadensity.com/inbound.php?id="
 	valueParam = "&data="
-	key,capacity = codekey(code)
+	key, capacity = codekey(code)
 	now = datetime.datetime.now()
 
 	value = min(capacity,value)
@@ -33,6 +27,7 @@ def update(value):
 
 	return
 
+
 class device():
 	def __init__(self, interval, rssi_threshold, rtime):
 		self.data = dict()
@@ -44,8 +39,9 @@ class device():
 	def __str__(self):
 		return self.number
 
-	def insert(self,time,macaddr,target,name,rssi_value):
-		#if target == 'KSA'.encode() or target == 'KSA_SUB'.encode:	
+	def insert(self, time, macaddr, target, name, rssi_value):
+		#if target != 'KSA'.encode() and target != 'KSA_SUB'.encode:
+		#	return
 
 		if rssi_value < self.rssi_threshold :
 			return
@@ -53,18 +49,22 @@ class device():
 		if macaddr in self.data:
 			self.data[macaddr][0] = time
 		else:
-			self.data[macaddr] = [time,target,name,rssi_value]
+			self.data[macaddr] = [time, target, name, rssi_value]
+
 		return
 	
 	def update(self):
 		L = []
 		interval = self.interval
+		
 		for key in self.data:
 			if time.time() - int(self.data[key][0]) > interval :
 				print("Device  " + str(key) +"  Depeted")
 				L.append(key)
+		
 		for i in L:
 			del self.data[i]
+
 		return
 	
 	def calculate(self):
@@ -76,7 +76,8 @@ class device():
 			print("Device Name : " + str(self.data[key][2][0:10]) + " Rssi_Value : "+str(self.data[key][3]))
 		return
 
-def build_packet_callback(device,option):
+
+def build_packet_callback(device, option):
 	def packet_callback(packet):
 		global last_update
 		if not packet.haslayer(Dot11):
@@ -112,6 +113,7 @@ def build_packet_callback(device,option):
 
 	return packet_callback
 
+
 def main():
 	#subprocess.call('sudo rmmod r8188eu.ko',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 down',shell=True)
@@ -125,6 +127,7 @@ def main():
 	
 	print("Logging start")
 	sniff(iface=interface, prn=built_packet_cb, store=0)
+
 
 if __name__ == '__main__':
 	main()
