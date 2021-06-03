@@ -1,8 +1,17 @@
 import time
 import datetime
 import netaddr
+import requests
 from scapy.all import *
 from key import codekey
+
+#
+# 2021 DS Project - Probelogger
+# Catches IEEE 802.11 proberequest signal and log / dispatch to server
+# https://ksadensity.com
+# Use with iface in monitor mode ( iwconfig ifacename down , iwconfig ifacename mode monitor, ifconfig ifacename up )
+# scapy and netaddr library need to be installed.
+#
 
 last_update = time.time()-120
 
