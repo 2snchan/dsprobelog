@@ -10,28 +10,36 @@ from logging.handlers import RotatingFileHandler
 import requests
 from key import codekey
 
-last_update = time.time()-60
+last_update = time.time()-120
 
 def update(value):
 	code = 2
 	baseURL = "https://ksadensity.com/inbound.php?id="
 	valueParam = "&data="
 	key,capacity = codekey(code)
+	now = datetime.datetime.now()
+
 	value = min(capacity,value)
 	URL = baseURL+str(key)+valueParam+str(value)
-	try:
-		response = requests.get(URL)
-		return response.status_code
-	except:
-		print("HTTP Request error")
+	
+	if now.hour >= 6 and now.hour < 24 :
+		try:
+			response = requests.get(URL)
+			return response.status_code
+		except:
+			print("HTTP Request error")
+	else:
+		print("WiFi Disabled Time")
+
 	return
 
 class device():
-	def __init__(self,interval, rssi_threshold):
+	def __init__(self, interval, rssi_threshold, rtime):
 		self.data = dict()
 		self.number = 0
 		self.interval = interval
 		self.rssi_threshold = rssi_threshold
+		self.rtime = rtime
 
 	def __str__(self):
 		return self.number
@@ -94,7 +102,7 @@ def build_packet_callback(device,option):
 
 		print("number of devices at "+str(time.time())+" is "+str(number))
 		
-		if time.time() - last_update >= 30 :
+		if time.time() - last_update >= device.rtime :
 			print(update(number))
 			last_update = time.time()
 			print("logged")
@@ -105,14 +113,13 @@ def build_packet_callback(device,option):
 	return packet_callback
 
 def main():
-	interface = "wlx005f67f12ddb"
-	
 	#subprocess.call('sudo rmmod r8188eu.ko',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 down',shell=True)
 	#subprocess.call('sudo iwconfig wlx7cc2c6026fb5 mode monitor',shell=True)
 	#subprocess.call('sudo ifconfig wlx7cc2c6026fb5 up',shell=True)
 
-	option, interval, rssi = True, 110, -80
+	interface, option, interval, rssi, rtime = "wlan2", True, 100, -80, 120
+
 	data = device(int(interval),rssi)
 	built_packet_cb = build_packet_callback(data,option)
 	
