@@ -3,20 +3,34 @@
 
     $conn = mysqli_connect("localhost", "root", "PRIVATE_PASSWORD", "realtime_data");
 
-    $sql = "SELECT * from people_density";
-    $result = mysqli_query($conn, $sql);
+    $data = array(
+        "lib" => "?",
+        "caf" => "?",
+        "ch3" => "?"
+    );
+    
+    $timestamp = date('Y-m-d H:i:s', strtotime("-3 minutes"));
 
-    $data = [];
-    while($row = mysqli_fetch_assoc($result)) {
-        $last_updated = strtotime($row["last_updated"]);
-        if(strtotime("-10 minutes") < $last_updated) {
-            $data[$row["place"]] = intval($row["people"]);
-        } else {
-            $data[$row["place"]] = "?";
+    foreach ($data as $place => $value){
+        $sql = "SELECT people FROM {$place}_log WHERE update_time >= '{$timestamp}'";
+        $result = mysqli_query($conn, $sql);
+
+        $logs = mysqli_fetch_all($result);
+        if(count($logs) == 0){
+            continue;
         }
-    }
 
+        $sum = 0;
+        foreach($logs as $people){
+            $sum += intval($people[0]);
+        }
+
+        $average = round($sum/count($logs));
+        $data[$place] = $average;
+    }
+    
     $json = json_encode($data);
     echo $json;
+
     mysqli_close($conn);
 ?>
