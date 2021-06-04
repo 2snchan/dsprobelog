@@ -21,6 +21,11 @@
         'caf' => 1.0,
         'ch3' => 1.0
     );
+    $default = array(
+        'lib' => 0,
+        'caf' => 0,
+        'ch3' => 0
+    );
     $limit = array(
         'lib' => 50,
         'caf' => 260,
@@ -33,7 +38,8 @@
     if($place == null or $raw_data == null) {
         echo '내부 통신 회선입니다. request를 보내지 말아주세요.';
     } else {
-        $data = min(round($raw_data * $ratio[$place]), $limit[$place]);
+        $people = max(round($raw_data * $ratio[$place]) - $default[$place], 0);
+        $data = min($people, $limit[$place]);
 
         $conn = mysqli_connect("localhost", "root", "PRIVATE_PASSWORD", "realtime_data");
         $timestamp = date('Y-m-d H:i:s');
