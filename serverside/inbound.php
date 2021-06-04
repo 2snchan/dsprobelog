@@ -30,7 +30,7 @@
     $place = $place_key[$_GET['id']] ?? null;
     $raw_data = $_GET['data'] ?? null;
     
-    if($place == null or $data == null) {
+    if($place == null or $raw_data == null) {
         echo '내부 통신 회선입니다. request를 보내지 말아주세요.';
     } else {
         $data = min(round($raw_data * $ratio[$place]), $limit[$place]);
